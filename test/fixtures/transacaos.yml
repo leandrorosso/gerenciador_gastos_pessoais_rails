@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tipo: 1
+  titulo: MyString
+  descricao: MyString
+  valor: 9.99
+  data: 2022-11-07
+  conta: one
+
+two:
+  tipo: 1
+  titulo: MyString
+  descricao: MyString
+  valor: 9.99
+  data: 2022-11-07
+  conta: two
