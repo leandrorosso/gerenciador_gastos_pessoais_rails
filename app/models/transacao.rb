@@ -5,10 +5,19 @@ class Transacao < ApplicationRecord
 
   before_validation :update_saldo_valor
 
+  after_destroy :delete_saldo_valor
+
   private
 
   def update_saldo_valor
-    novo_saldo = transacao.tipo = 1 ? (conta.saldo + valor) : (conta.saldo - valor)
-    conta.update(saldo: novo_saldo)
+    tipo == 1 ? atualiza_saldo(valor) : atualiza_saldo(valor * -1)
+  end
+
+  def delete_saldo_valor
+    tipo == 1 ? atualiza_saldo(valor * -1) : atualiza_saldo(valor)
+  end
+
+  def atualiza_saldo valor_lancado
+    conta.update(saldo: (conta.saldo + valor_lancado))
   end
 end

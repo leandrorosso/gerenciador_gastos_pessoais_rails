@@ -12,16 +12,16 @@ module Api
       end
 
       def create
-        transacao = Transacao.new(conta_params)
-        if transacao.save
+        @transacao = Transacao.new(transacao_params)
+        if @transacao.save
           render json: { successful: true }
         else
-          render json: transacao.errors, status: :unprocessable_entity
+          render json: @transacao.errors, status: :unprocessable_entity
         end
       end
 
       def update
-        if @transacao.update(conta_params)
+        if @transacao.update(transacao_params)
           render json: @transacao
         else
           render json: @transacao.errors, status: :unprocessable_entity
@@ -40,7 +40,7 @@ module Api
       end
 
       def transacao_params
-        params.require(:transacao).params.permit(:tipo, :titulo, :descricao, :valor, :data, :conta_id)
+        params.permit(:tipo, :titulo, :descricao, :valor, :data, :conta_id)
       end
     end
   end
