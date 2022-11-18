@@ -1,3 +1,4 @@
+
 class Transacao < ApplicationRecord
   belongs_to :conta
 
@@ -10,7 +11,8 @@ class Transacao < ApplicationRecord
   private
 
   def update_saldo_valor
-    tipo == 1 ? atualiza_saldo(valor) : atualiza_saldo(valor * -1)
+    valor_anterior =  tipo_was.nil? ? 0 : (tipo_was == 1 ? (valor_was * -1) : valor_was)
+    tipo == 1 ? atualiza_saldo(valor + valor_anterior) : atualiza_saldo((valor * -1) + valor_anterior)
   end
 
   def delete_saldo_valor

@@ -6,7 +6,7 @@ class Api::V1::ContasController < ApplicationController
   end
 
   def show
-    render json: @conta
+    render json: @conta, include: [:transacaos]
   end
 
   def create
